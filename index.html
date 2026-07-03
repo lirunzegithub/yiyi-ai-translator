@@ -47,7 +47,7 @@
   </div>
 
   <div class="meta">
-    生效日期 / Effective date: 2026-07-01 &nbsp;|&nbsp;
+    生效日期 / Effective date: 2026-07-03 &nbsp;|&nbsp;
     联系方式 / Contact: <a href="mailto:lirunzer2218@gmail.com">lirunzer2218@gmail.com</a>
   </div>
 
@@ -58,9 +58,9 @@
 
   <h3>1. 我们如何处理你的数据</h3>
   <ul>
-    <li><strong>文字 / 图片翻译</strong>：默认由<strong>设备本地</strong>的离线模型与词典处理。若你在「设置」里<strong>自行配置了第三方 API</strong>（OpenAI 兼容接口），相关文字/图片会<strong>按你的配置</strong>发送到<strong>你自己填写的那个 API 地址</strong>，用于生成译文。该数据由你选择的 API 提供方按其隐私政策处理，与本应用开发者无关。</li>
-    <li><strong>语音识别</strong>：录音在<strong>设备本地</strong>完成转写（端侧模型），用于把语音转成文字再走上面的翻译流程。</li>
-    <li><strong>位置信息</strong>：仅在你<strong>主动使用</strong>相关功能时获取。用于：①为你的发送记录附带位置；②（可选）天气显示；③（可选）“安全模式”下把你的实时位置分享给<strong>你指定的接收人</strong>。位置默认<strong>仅保存在你的设备本地</strong>。</li>
+    <li><strong>文字 / 图片翻译</strong>：默认由<strong>设备本地</strong>的离线模型与词典处理（翻译模式的文字翻译<strong>始终</strong>在本地完成，不会外发）。若你在「设置」里<strong>自行配置了第三方 API</strong>（OpenAI 兼容接口），则<strong>助手模式的对话内容（文字及必要的上下文）</strong>与<strong>图片翻译中的图片及随附文字</strong>会发送到<strong>你自己填写的那个 API 地址</strong>，仅用于生成译文/回答。<strong>每个 API 服务首次发送前，应用会弹窗说明将发送的内容与接收方，征得你的明确同意后才发送</strong>；你可随时在应用内「设置 → 隐私」撤回该授权。该数据由你选择的 API 提供方按其隐私政策处理，与本应用开发者无关。</li>
+    <li><strong>语音识别</strong>：录音、转写与说话人分离全部在<strong>设备本地</strong>完成（端侧模型），<strong>录音与转写内容不会上传到任何服务器</strong>；转写出的文字再走上面的本地翻译流程。</li>
+    <li><strong>位置信息</strong>：仅在你授权后获取。用于：①每次发送时把位置记入<strong>仅保存在本机</strong>的「安全与记录」行程日志（供你自查）；②（可选）把<strong>粗略经纬度</strong>发送给天气服务以显示当地天气，城市名由 Apple 系统地理编码服务解析。位置信息<strong>不会</strong>发送给任何 AI 服务商。</li>
     <li><strong>会话历史</strong>：你的对话、录音、图片<strong>仅保存在设备本地</strong>（iOS SwiftData / 沙盒），可随时删除。</li>
     <li><strong>API 密钥</strong>：你填写的第三方 API 密钥<strong>仅加密保存在设备的钥匙串（Keychain）</strong>，不外传。</li>
   </ul>
@@ -68,11 +68,12 @@
   <h3>2. 第三方服务</h3>
   <p>为实现功能，本应用可能与以下服务通信（仅传输实现该功能所必需的数据）：</p>
   <ul>
-    <li><strong>你自行配置的翻译 API 提供方</strong>（文字/图片译文，可选）。</li>
-    <li><strong>Open-Meteo</strong>（天气，可选，会用到大致位置/经纬度）。</li>
-    <li><strong>Hugging Face</strong>（按需下载可选的本地模型文件）。</li>
+    <li><strong>你自行配置的 AI 服务提供方</strong>（可选）：仅在你主动配置并<strong>逐服务同意</strong>后，接收助手模式对话与图片翻译内容。接收方完全由你选择。</li>
+    <li><strong>Open-Meteo</strong>（天气，可选）：仅接收粗略经纬度，不含任何身份信息。</li>
+    <li><strong>Apple 系统服务</strong>：地理编码（坐标→城市名）由 iOS 系统完成，遵循 Apple 隐私政策。</li>
+    <li><strong>Hugging Face</strong>（可选）：仅在你主动下载本地模型时访问，用于下载模型文件，不上传你的任何数据。</li>
   </ul>
-  <p>这些第三方各有其隐私政策，请你自行查阅。</p>
+  <p>本应用只向上述第三方传输实现对应功能所必需的最少数据。这些第三方各有其隐私政策；配置自定义 AI 服务前，请确认其数据保护水平满足你的要求。</p>
 
   <h3>3. 我们不做的事</h3>
   <ul>
@@ -83,6 +84,7 @@
 
   <h3>4. 你的控制权</h3>
   <ul>
+    <li>可在应用内「设置 → 隐私」随时<strong>撤回对第三方 AI 服务的数据共享授权</strong>；撤回后再次发送前会重新征求同意。删除或停用 API 配置后，全部处理即回到纯本地。</li>
     <li>可在 iOS「设置 → 译亿AI」中随时<strong>撤销</strong>麦克风、定位、相册、语音识别等权限。</li>
     <li>可在应用内<strong>删除</strong>任意会话/录音/图片。</li>
     <li>无需注册账号，卸载应用即清除本地数据。</li>
@@ -101,9 +103,9 @@
 
   <h3>1. How we handle your data</h3>
   <ul>
-    <li><strong>Text / image translation</strong>: handled by <strong>on-device</strong> offline models and dictionaries by default. If you <strong>configure a third-party API</strong> (OpenAI-compatible) in Settings, the relevant text/images are sent <strong>to the API endpoint you yourself entered</strong>, solely to produce translations. That data is handled by the API provider you chose under their own privacy policy; it does not reach the App’s developer.</li>
-    <li><strong>Speech recognition</strong>: transcription runs <strong>on-device</strong>; the resulting text then follows the translation flow above.</li>
-    <li><strong>Location</strong>: accessed only when you <strong>actively use</strong> the related features, to: (a) tag your sent records with a location; (b) optionally show weather; (c) optionally, in “Safety Mode,” share your live location with <strong>recipients you designate</strong>. Location is stored <strong>only on your device</strong> by default.</li>
+    <li><strong>Text / image translation</strong>: handled by <strong>on-device</strong> offline models and dictionaries by default (text translation in Translate mode <strong>always</strong> runs locally and is never sent out). If you <strong>configure a third-party API</strong> (OpenAI-compatible) in Settings, then <strong>Assistant-mode conversations (text plus necessary context)</strong> and <strong>images with accompanying text in image translation</strong> are sent <strong>to the API endpoint you yourself entered</strong>, solely to produce translations/answers. <strong>Before the first send to each API service, the App shows a dialog explaining what will be sent and to whom, and sends only with your explicit consent</strong>; you can revoke it anytime in the App under Settings → Privacy. That data is handled by the API provider you chose under their own privacy policy; it does not reach the App’s developer.</li>
+    <li><strong>Speech recognition</strong>: recording, transcription, and speaker separation all run <strong>on-device</strong>; <strong>audio and transcripts are never uploaded to any server</strong>. The transcribed text then follows the local translation flow above.</li>
+    <li><strong>Location</strong>: accessed only with your permission, to: (a) log each send’s location into a trip journal stored <strong>only on your device</strong> (for your own review); (b) optionally send <strong>approximate coordinates</strong> to a weather service to show local weather, with city names resolved by Apple’s system geocoding. Location is <strong>never</strong> sent to any AI provider.</li>
     <li><strong>Conversation history</strong>: your chats, recordings, and images are stored <strong>only on your device</strong> (iOS SwiftData / sandbox) and can be deleted anytime.</li>
     <li><strong>API keys</strong>: any third-party API key you enter is stored <strong>encrypted in the device Keychain only</strong> and never transmitted elsewhere.</li>
   </ul>
@@ -111,11 +113,12 @@
   <h3>2. Third-party services</h3>
   <p>To provide features, the App may communicate with (transmitting only what that feature requires):</p>
   <ul>
-    <li><strong>Your configured translation API provider</strong> (text/image translations, optional).</li>
-    <li><strong>Open-Meteo</strong> (weather, optional; uses approximate location/coordinates).</li>
-    <li><strong>Hugging Face</strong> (on-demand download of optional on-device model files).</li>
+    <li><strong>Your configured AI service provider</strong> (optional): receives Assistant-mode conversations and image-translation content only after you configure it and give <strong>per-service consent</strong>. The recipient is entirely your choice.</li>
+    <li><strong>Open-Meteo</strong> (weather, optional): receives approximate coordinates only, with no identifying information.</li>
+    <li><strong>Apple system services</strong>: geocoding (coordinates → city name) is performed by iOS under Apple’s privacy policy.</li>
+    <li><strong>Hugging Face</strong> (optional): accessed only when you actively download an on-device model; used solely to download model files, never to upload your data.</li>
   </ul>
-  <p>Each third party has its own privacy policy; please review them.</p>
+  <p>The App transmits only the minimum data each feature requires. Each third party has its own privacy policy; before configuring a custom AI service, please confirm its data protection meets your expectations.</p>
 
   <h3>3. What we do NOT do</h3>
   <ul>
@@ -126,6 +129,7 @@
 
   <h3>4. Your controls</h3>
   <ul>
+    <li>Revoke your <strong>data-sharing consent for third-party AI services</strong> anytime in the App under Settings → Privacy; the App will ask again before the next send. Removing or disabling the API configuration returns all processing fully on-device.</li>
     <li>Revoke microphone, location, photos, and speech-recognition permissions anytime in iOS Settings.</li>
     <li>Delete any conversation/recording/image inside the App.</li>
     <li>No account required; uninstalling removes local data.</li>
